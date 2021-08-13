@@ -17,8 +17,8 @@ public class OrderService implements Service<Order> {
     }
 
     @Override
-    public Order getById(Long id) {
-        return dao.getById(id);
+    public Order findById(Long id) {
+        return dao.findById(id).orElse(null);
     }
 
     @Override

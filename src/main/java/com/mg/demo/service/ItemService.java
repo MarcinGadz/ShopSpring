@@ -17,8 +17,8 @@ public class ItemService implements Service<Item> {
     }
 
     @Override
-    public Item getById(Long id) {
-        return dao.getById(id);
+    public Item findById(Long id) {
+        return dao.findById(id).orElse(null);
     }
 
     @Override

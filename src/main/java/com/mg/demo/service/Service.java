@@ -3,7 +3,7 @@ package com.mg.demo.service;
 import java.util.List;
 
 public interface Service<T> {
-    T getById(Long id);
+    T findById(Long id);
     List<T> getAll();
     void deleteById(Long id);
     T add(T obj);

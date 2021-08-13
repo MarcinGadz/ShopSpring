@@ -17,8 +17,8 @@ public class UserService implements Service<User> {
     }
 
     @Override
-    public User getById(Long id) {
-        return dao.getById(id);
+    public User findById(Long id) {
+        return dao.findById(id).orElse(null);
     }
 
     @Override
