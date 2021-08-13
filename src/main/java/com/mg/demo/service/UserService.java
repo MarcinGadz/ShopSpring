@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+@org.springframework.stereotype.Service
 public class UserService implements Service<User> {
 
     private UserDAO dao;
@@ -31,12 +32,17 @@ public class UserService implements Service<User> {
     }
 
     @Override
-    public void add(User obj) {
-        dao.save(obj);
+    public User add(User obj) {
+        return dao.save(obj);
     }
 
     @Override
     public User update(User obj) {
         return dao.save(obj);
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        return dao.existsById(id);
     }
 }
