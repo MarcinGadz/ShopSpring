@@ -1,14 +1,11 @@
 package com.mg.demo.entity;
 
+import javax.persistence.Entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-public class Item {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+public class Item extends com.mg.demo.entity.Entity {
 
     @Column
     private String name;
@@ -16,14 +13,6 @@ public class Item {
     private BigDecimal price;
     @Column
     private String description;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

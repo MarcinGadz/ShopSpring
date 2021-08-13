@@ -1,14 +1,11 @@
 package com.mg.demo.entity;
 
+import javax.persistence.Entity;
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
+public class User extends com.mg.demo.entity.Entity {
 
     @Column
     private String username;
@@ -17,14 +14,6 @@ public class User {
 
     @OneToMany
     private List<Order> orders;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
