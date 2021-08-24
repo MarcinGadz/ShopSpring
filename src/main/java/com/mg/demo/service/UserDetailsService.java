@@ -2,6 +2,7 @@ package com.mg.demo.service;
 
 import com.mg.demo.dao.UserDAO;
 import com.mg.demo.entity.User;
+import com.mg.demo.util.MyUserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,47 +30,4 @@ public class UserDetailsService implements org.springframework.security.core.use
         return new MyUserPrincipal(user);
     }
 
-    private class MyUserPrincipal implements UserDetails {
-        private User user;
-
-        public MyUserPrincipal(User user) {
-            this.user = user;
-        }
-
-        @Override
-        public Collection<? extends GrantedAuthority> getAuthorities() {
-            //TODO
-            return null;
-        }
-
-        @Override
-        public String getPassword() {
-            return user.getPasswordHash();
-        }
-
-        @Override
-        public String getUsername() {
-            return user.getUsername();
-        }
-
-        @Override
-        public boolean isAccountNonExpired() {
-            return true;
-        }
-
-        @Override
-        public boolean isAccountNonLocked() {
-            return true;
-        }
-
-        @Override
-        public boolean isCredentialsNonExpired() {
-            return true;
-        }
-
-        @Override
-        public boolean isEnabled() {
-            return true;
-        }
-    }
 }
