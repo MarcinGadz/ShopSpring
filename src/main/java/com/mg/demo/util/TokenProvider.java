@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
 
-class TokenProvider {
+public class TokenProvider {
     private static final Logger LOGGER = LoggerFactory.getLogger(TokenProvider.class);
     @Value("${jwt.secret}")
     private String secretKey;
