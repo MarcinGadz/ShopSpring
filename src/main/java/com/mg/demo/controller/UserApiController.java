@@ -13,26 +13,25 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
 
 @RestController
 @RequestMapping("/users")
-public class UserApiController extends ApiTemplateController<User>{
+public class UserApiController extends ApiTemplateController<User> {
+    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
     private AuthenticationManager manager;
     private UserDetailsService userDetailsService;
     private TokenProvider tokenProvider;
-    private Service<User> service;
+    private final Service<User> service;
 
     @Autowired
     public UserApiController(Service<User> service) {
         this.service = service;
-    }
-
-    @PostConstruct
-    private void setSuperService() {
-        super.setService(this.service);
     }
 
 //    @GetMapping
@@ -73,6 +72,10 @@ public class UserApiController extends ApiTemplateController<User>{
 //        service.deleteById(id);
 //    }
 
+    @PostConstruct
+    private void setSuperService() {
+        super.setService(this.service);
+    }
 
     @Autowired
     public void setTokenProvider(TokenProvider tokenProvider) {
@@ -89,7 +92,6 @@ public class UserApiController extends ApiTemplateController<User>{
         this.manager = manager;
     }
 
-    private final Logger logger = LoggerFactory.getLogger(getClass().getName());
     @PostMapping("/authenticate")
     public String login(@RequestBody User user) {
         String username = user.getUsername();

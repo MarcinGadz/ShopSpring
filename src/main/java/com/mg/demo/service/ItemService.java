@@ -9,7 +9,7 @@ import java.util.List;
 @org.springframework.stereotype.Service
 public class ItemService implements Service<Item> {
 
-    private ItemDAO dao;
+    private final ItemDAO dao;
 
     @Autowired
     public ItemService(ItemDAO dao) {

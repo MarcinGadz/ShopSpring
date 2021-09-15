@@ -1,7 +1,7 @@
 package com.mg.demo.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity

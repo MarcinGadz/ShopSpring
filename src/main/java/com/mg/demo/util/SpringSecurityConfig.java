@@ -4,11 +4,8 @@ import com.mg.demo.service.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,6 +21,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private JwtAuthenticationEntryPoint jwtAuthEntryPoint;
+    private UserDetailsService jwtUserDetailsService;
+    private TokenProvider tokenProvider;
 
     public JwtAuthenticationEntryPoint getJwtAuthEntryPoint() {
         return jwtAuthEntryPoint;
@@ -34,14 +33,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         this.jwtAuthEntryPoint = jwtAuthEntryPoint;
     }
 
-    private UserDetailsService jwtUserDetailsService;
-
     @Autowired
     public void setJwtUserDetailsService(UserDetailsService jwtUserDetailsService) {
         this.jwtUserDetailsService = jwtUserDetailsService;
     }
-
-    private TokenProvider tokenProvider;
 
     public TokenProvider getTokenProvider() {
         return tokenProvider;

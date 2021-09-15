@@ -1,7 +1,10 @@
 package com.mg.demo.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.*;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -15,12 +18,37 @@ public class User extends com.mg.demo.entity.Entity {
     @OneToMany
     private List<Order> orders;
 
+    @ManyToMany
+//    @JoinTable(
+//            name = "users_roles",
+//            joinColumns = @JoinColumn(
+//                    name = "user_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(
+//                    name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
+
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 
     public String getPassword() {

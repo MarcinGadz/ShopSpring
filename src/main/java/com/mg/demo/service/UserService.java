@@ -12,11 +12,18 @@ import java.util.List;
 @org.springframework.stereotype.Service
 public class UserService implements Service<User> {
 
+    private PasswordEncoder encoder;
+    private final UserDAO dao;
+
+    @Autowired
+    public UserService(UserDAO dao) {
+        this.dao = dao;
+    }
+
     @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
-    private PasswordEncoder encoder;
 
     public PasswordEncoder getEncoder() {
         return encoder;
@@ -25,13 +32,6 @@ public class UserService implements Service<User> {
     @Autowired
     public void setEncoder(PasswordEncoder encoder) {
         this.encoder = encoder;
-    }
-
-    private UserDAO dao;
-
-    @Autowired
-    public UserService(UserDAO dao) {
-        this.dao = dao;
     }
 
     @Override

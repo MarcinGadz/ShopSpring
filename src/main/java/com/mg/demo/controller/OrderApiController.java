@@ -11,7 +11,7 @@ import javax.annotation.PostConstruct;
 @RestController
 @RequestMapping("/orders")
 public class OrderApiController extends ApiTemplateController<Order> {
-    private Service<Order> service;
+    private final Service<Order> service;
 
     @Autowired
     public OrderApiController(Service<Order> service) {

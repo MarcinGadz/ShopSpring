@@ -9,7 +9,7 @@ import java.util.List;
 @org.springframework.stereotype.Service
 public class OrderService implements Service<Order> {
 
-    private OrderDAO dao;
+    private final OrderDAO dao;
 
     @Autowired
     public OrderService(OrderDAO dao) {
