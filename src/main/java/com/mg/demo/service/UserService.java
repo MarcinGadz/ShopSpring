@@ -51,13 +51,13 @@ public class UserService implements Service<User> {
 
     @Override
     public User add(User obj) {
-        obj.setPasswordHash(getEncoder().encode(obj.getPasswordHash()));
+        obj.setPassword(getEncoder().encode(obj.getPassword()));
         return dao.save(obj);
     }
 
     @Override
     public User update(User obj) {
-        obj.setPasswordHash(getEncoder().encode(obj.getPasswordHash()));
+        obj.setPassword(getEncoder().encode(obj.getPassword()));
         return dao.save(obj);
     }
 

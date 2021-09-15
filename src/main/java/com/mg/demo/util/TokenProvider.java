@@ -17,6 +17,7 @@ import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.stream.Collectors;
 
@@ -45,7 +46,9 @@ public class TokenProvider {
 
         Collection<? extends GrantedAuthority> authorities = Arrays.stream(claims.get("auth").toString().split(","))
                 .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
-
+        if(authorities.isEmpty()) {
+            authorities = Collections.emptyList();
+        }
         MyUserPrincipal principal = new MyUserPrincipal(claims.getSubject(), "", authorities);
 
         return new UsernamePasswordAuthenticationToken(principal, "", authorities);

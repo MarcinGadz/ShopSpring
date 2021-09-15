@@ -16,7 +16,7 @@ public class MyUserPrincipal implements UserDetails {
 
     public MyUserPrincipal(String subject, String password, Collection<? extends GrantedAuthority> authorities) {
         this.user = new User();
-        this.user.setPasswordHash(password);
+        this.user.setPassword(password);
         this.user.setUsername(subject);
         this.authorities = authorities;
     }
@@ -28,7 +28,7 @@ public class MyUserPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
-        return user.getPasswordHash();
+        return user.getPassword();
     }
 
     @Override

@@ -10,7 +10,7 @@ public class User extends com.mg.demo.entity.Entity {
     @Column
     private String username;
     @Column
-    private String passwordHash;
+    private String password;
 
     @OneToMany
     private List<Order> orders;
@@ -23,11 +23,11 @@ public class User extends com.mg.demo.entity.Entity {
         this.username = username;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setPassword(String passwordHash) {
+        this.password = passwordHash;
     }
 }
