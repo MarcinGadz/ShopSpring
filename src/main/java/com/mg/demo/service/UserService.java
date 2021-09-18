@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 @org.springframework.stereotype.Service
@@ -19,12 +20,19 @@ public class UserService implements Service<User> {
     private PasswordEncoder encoder;
     private final UserDAO dao;
     private final RoleDAO roleDAO;
+    private final Role customerRole;
 
     @Autowired
     public UserService(UserDAO dao, RoleDAO roleDAO) {
+        Role customerRoleTemp;
         this.dao = dao;
         this.roleDAO = roleDAO;
-        roleDAO.save(customerRole);
+        customerRoleTemp = roleDAO.findByName("CUSTOMER");
+        if(customerRoleTemp == null) {
+            customerRoleTemp = new Role("CUSTOMER");
+            roleDAO.save(customerRoleTemp);
+        }
+        this.customerRole = customerRoleTemp;
     }
 
     @Bean
@@ -56,12 +64,14 @@ public class UserService implements Service<User> {
         dao.deleteById(id);
     }
 
-    private Role customerRole = new Role(1L, "CUSTOMER");
-
     @Override
     public User add(User obj) {
         obj.setPassword(getEncoder().encode(obj.getPassword()));
-        obj.setRoles(Arrays.asList(customerRole));
+        Collection<Role> userRoles = obj.getRoles();
+        if(userRoles == null) {
+            userRoles = new ArrayList<>();
+        }
+        userRoles.add(customerRole);
         return dao.save(obj);
     }
 

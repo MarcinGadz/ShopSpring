@@ -53,10 +53,6 @@ public class TokenProvider {
     public Authentication getAuthentication(String token) {
 
         Claims claims = Jwts.parser().setSigningKey(this.secretKey).parseClaimsJws(token).getBody();
-
-//        Collection<? extends GrantedAuthority> authorities;
-//        authorities = Collections.emptyList();
-//        User principal = new User(claims.getSubject(), "", authorities);
         UserDetails principal = service.loadUserByUsername(claims.getSubject());
 
         return new UsernamePasswordAuthenticationToken(principal, "", principal.getAuthorities());
