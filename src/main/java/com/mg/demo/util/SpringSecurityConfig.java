@@ -4,6 +4,7 @@ import com.mg.demo.service.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -77,7 +78,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests().antMatchers("/users/**").permitAll()
-                .anyRequest().hasRole("CUSTOMER")
+                .antMatchers(HttpMethod.POST, "/items/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/items/**").hasRole("ADMIN")
+                .antMatchers("/items/**").hasAnyRole("ADMIN", "CUSTOMER")
+                .anyRequest().authenticated()
                 .and().exceptionHandling().authenticationEntryPoint(jwtAuthEntryPoint)
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class);
