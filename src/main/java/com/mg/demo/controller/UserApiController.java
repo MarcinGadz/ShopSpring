@@ -24,10 +24,10 @@ import javax.annotation.PostConstruct;
 @RequestMapping("/users")
 public class UserApiController extends ApiTemplateController<User> {
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());
+    private final Service<User> service;
     private AuthenticationManager manager;
     private UserDetailsService userDetailsService;
     private TokenProvider tokenProvider;
-    private final Service<User> service;
 
     @Autowired
     public UserApiController(Service<User> service) {

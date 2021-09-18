@@ -1,8 +1,6 @@
 package com.mg.demo.util;
 
-import com.mg.demo.entity.User;
 import com.mg.demo.service.UserDetailsService;
-import com.mg.demo.service.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -18,23 +16,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.stream.Collectors;
 
 public class TokenProvider {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(TokenProvider.class);
     private UserDetailsService service;
+    @Value("${jwt.secret}")
+    private String secretKey;
 
     @Autowired
     public void setService(UserDetailsService service) {
         this.service = service;
     }
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(TokenProvider.class);
-    @Value("${jwt.secret}")
-    private String secretKey;
 
     public String createToken(Authentication authentication) {
 

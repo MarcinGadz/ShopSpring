@@ -10,17 +10,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 @org.springframework.stereotype.Service
 public class UserService implements Service<User> {
 
-    private PasswordEncoder encoder;
     private final UserDAO dao;
     private final RoleDAO roleDAO;
     private final Role customerRole;
+    private PasswordEncoder encoder;
 
     @Autowired
     public UserService(UserDAO dao, RoleDAO roleDAO) {
@@ -28,7 +27,7 @@ public class UserService implements Service<User> {
         this.dao = dao;
         this.roleDAO = roleDAO;
         customerRoleTemp = roleDAO.findByName("CUSTOMER");
-        if(customerRoleTemp == null) {
+        if (customerRoleTemp == null) {
             customerRoleTemp = new Role("CUSTOMER");
             roleDAO.save(customerRoleTemp);
         }
@@ -68,7 +67,7 @@ public class UserService implements Service<User> {
     public User add(User obj) {
         obj.setPassword(getEncoder().encode(obj.getPassword()));
         Collection<Role> userRoles = obj.getRoles();
-        if(userRoles == null) {
+        if (userRoles == null) {
             userRoles = new ArrayList<>();
         }
         userRoles.add(customerRole);

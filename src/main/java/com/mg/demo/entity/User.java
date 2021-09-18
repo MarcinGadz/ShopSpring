@@ -1,7 +1,7 @@
 package com.mg.demo.entity;
 
-import javax.persistence.*;
 import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 
@@ -25,10 +25,6 @@ public class User extends com.mg.demo.entity.Entity {
                     name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;
 
-    public String getUsername() {
-        return username;
-    }
-
     public User() {
     }
 
@@ -36,6 +32,10 @@ public class User extends com.mg.demo.entity.Entity {
         this.username = username;
         this.password = password;
         this.roles = roles;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public void setUsername(String username) {

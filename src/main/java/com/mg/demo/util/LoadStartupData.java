@@ -10,7 +10,6 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 
 @Component
@@ -27,7 +26,7 @@ public class LoadStartupData implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        if(userService.getAll().isEmpty()) {
+        if (userService.getAll().isEmpty()) {
             Role adminRole = new Role("ADMIN");
             roleDAO.save(adminRole);
             Collection<Role> roles = new ArrayList<>();
