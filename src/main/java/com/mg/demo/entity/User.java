@@ -1,5 +1,8 @@
 package com.mg.demo.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.springframework.data.repository.cdi.Eager;
+
 import javax.persistence.Entity;
 import javax.persistence.*;
 import java.util.Collection;
@@ -16,7 +19,7 @@ public class User extends com.mg.demo.entity.Entity {
     @OneToMany
     private List<Order> orders;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(

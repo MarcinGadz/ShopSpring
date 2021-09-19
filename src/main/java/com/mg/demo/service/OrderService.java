@@ -1,6 +1,7 @@
 package com.mg.demo.service;
 
 import com.mg.demo.dao.OrderDAO;
+import com.mg.demo.entity.Item;
 import com.mg.demo.entity.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -32,7 +33,7 @@ public class OrderService implements Service<Order> {
     }
 
     @Override
-    public Order add(Order obj) {
+    public Order save(Order obj) {
         return dao.save(obj);
     }
 
@@ -44,5 +45,10 @@ public class OrderService implements Service<Order> {
     @Override
     public boolean existsById(Long id) {
         return dao.existsById(id);
+    }
+
+    @Override
+    public List<Order> saveAll(Iterable<Order> objects) {
+        return dao.saveAll(objects);
     }
 }

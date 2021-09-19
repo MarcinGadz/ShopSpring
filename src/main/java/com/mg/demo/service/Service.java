@@ -9,7 +9,9 @@ public interface Service<T> {
 
     void deleteById(Long id);
 
-    T add(T obj);
+    T save(T obj);
+
+    List<T> saveAll(Iterable<T> objects);
 
     T update(T obj);
 

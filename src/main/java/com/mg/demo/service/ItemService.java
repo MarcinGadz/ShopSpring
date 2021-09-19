@@ -32,7 +32,7 @@ public class ItemService implements Service<Item> {
     }
 
     @Override
-    public Item add(Item obj) {
+    public Item save(Item obj) {
         return dao.save(obj);
     }
 
@@ -44,5 +44,10 @@ public class ItemService implements Service<Item> {
     @Override
     public boolean existsById(Long id) {
         return dao.existsById(id);
+    }
+
+    @Override
+    public List<Item> saveAll(Iterable<Item> objects) {
+        return dao.saveAll(objects);
     }
 }

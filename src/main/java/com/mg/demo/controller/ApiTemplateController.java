@@ -37,7 +37,7 @@ public abstract class ApiTemplateController<T extends Entity> {
     @PostMapping
     public T save(@RequestBody T item) {
         logger.info("Saving: " + item);
-        service.add(item);
+        service.save(item);
         logger.info("Saved: " + item);
         return item;
     }
