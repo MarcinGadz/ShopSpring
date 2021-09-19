@@ -14,6 +14,15 @@ public class Item extends com.mg.demo.entity.Entity {
     @Column
     private String description;
 
+    public Item(String name, BigDecimal price, String description) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+    }
+
+    public Item() {
+    }
+
     public String getName() {
         return name;
     }
