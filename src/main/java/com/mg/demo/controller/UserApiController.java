@@ -34,44 +34,6 @@ public class UserApiController extends ApiTemplateController<User> {
         this.service = service;
     }
 
-//    @GetMapping
-//    public List<User> getAll() {
-//        logger.info("getting all items");
-//        return service.getAll();
-//    }
-//
-//    @GetMapping("/{id}")
-//    public User getOne(@PathVariable long id) {
-//        logger.info("Getting by id: " + id);
-//        return service.findById(id);
-//    }
-//
-//    @PostMapping
-//    public User save(@RequestBody User item) {
-//        logger.info("Saving: " + item);
-//        service.add(item);
-//        logger.info("Saved: " + item);
-//        return item;
-//    }
-//
-//    @PutMapping
-//    public User update(@RequestBody User item) {
-//        if (service.existsById(item.getId())) {
-//            logger.info("Updating existing item by: " + item);
-//            service.update(item);
-//            return item;
-//        }
-//        logger.info("Item with id " + item.getId() + " do not exists");
-//        //TODO throw proper exception
-//        return null;
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public void deleteById(@PathVariable long id) {
-//        logger.info("Deleting by id: " + id);
-//        service.deleteById(id);
-//    }
-
     @PostConstruct
     private void setSuperService() {
         super.setService(this.service);
