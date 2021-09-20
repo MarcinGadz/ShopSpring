@@ -1,7 +1,6 @@
 package com.mg.demo.entity;
 
-import org.hibernate.annotations.Fetch;
-import org.springframework.data.repository.cdi.Eager;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
@@ -9,7 +8,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-public class User extends com.mg.demo.entity.Entity {
+public class User extends com.mg.demo.entity.Entity implements UserDetails {
 
     @Column
     private String username;
@@ -26,19 +25,39 @@ public class User extends com.mg.demo.entity.Entity {
                     name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
-    private Collection<Role> roles;
+    private Collection<Role> authorities;
 
     public User() {
     }
 
-    public User(String username, String password, Collection<Role> roles) {
+    public User(String username, String password, Collection<Role> authorities) {
         this.username = username;
         this.password = password;
-        this.roles = roles;
+        this.authorities = authorities;
     }
 
     public String getUsername() {
         return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 
     public void setUsername(String username) {
@@ -53,13 +72,15 @@ public class User extends com.mg.demo.entity.Entity {
         this.orders = orders;
     }
 
-    public Collection<Role> getRoles() {
-        return roles;
+    @Override
+    public Collection<Role> getAuthorities() {
+        return authorities;
     }
 
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
+    public void setAuthorities(Collection<Role> roles) {
+        this.authorities = roles;
     }
+
 
     public String getPassword() {
         return password;

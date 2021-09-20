@@ -36,10 +36,10 @@ public class UserDetailsService implements org.springframework.security.core.use
     }
 
     private Collection<GrantedAuthority> getAuthorities(User user) {
-        Collection<Role> userRoles = user.getRoles();
+        Collection<Role> userRoles = user.getAuthorities();
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         for (Role r : userRoles) {
-            authorities.add(new SimpleGrantedAuthority(r.getName().toUpperCase()));
+            authorities.add(new SimpleGrantedAuthority(r.getAuthority().toUpperCase()));
         }
         return authorities;
     }

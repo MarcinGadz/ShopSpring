@@ -1,23 +1,24 @@
 package com.mg.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-public class Role {
+public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
-    @ManyToMany(mappedBy = "roles")
+    private String authority;
+    @ManyToMany(mappedBy = "authorities")
     @JsonIgnore
     private Collection<User> users;
 
-    public Role(String name) {
-        this.name = name;
+    public Role(String Authority) {
+        this.authority = Authority;
     }
 
     public Role() {
@@ -31,12 +32,13 @@ public class Role {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public String getAuthority() {
+        return authority;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAuthority(String name) {
+        this.authority = name;
     }
 
     public Collection<User> getUsers() {
@@ -46,4 +48,5 @@ public class Role {
     public void setUsers(Collection<User> users) {
         this.users = users;
     }
+
 }

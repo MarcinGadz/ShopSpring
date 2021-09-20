@@ -1,20 +1,23 @@
 package com.mg.demo.service;
 
 import com.mg.demo.dao.OrderDAO;
-import com.mg.demo.entity.Item;
 import com.mg.demo.entity.Order;
+import com.mg.demo.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Collections;
 import java.util.List;
 
 @org.springframework.stereotype.Service
 public class OrderService implements Service<Order> {
 
     private final OrderDAO dao;
+    private final Service<User> userService;
 
     @Autowired
-    public OrderService(OrderDAO dao) {
+    public OrderService(OrderDAO dao, Service<User> userService) {
         this.dao = dao;
+        this.userService = userService;
     }
 
     @Override
@@ -50,5 +53,13 @@ public class OrderService implements Service<Order> {
     @Override
     public List<Order> saveAll(Iterable<Order> objects) {
         return dao.saveAll(objects);
+    }
+
+    public List<Order> findByBuyerId(Long id) {
+        User buyer = userService.findById(id);
+        if (buyer == null) {
+            return Collections.emptyList();
+        }
+        return dao.findByBuyer(buyer);
     }
 }

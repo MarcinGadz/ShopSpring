@@ -2,7 +2,6 @@ package com.mg.demo.service;
 
 import com.mg.demo.dao.RoleDAO;
 import com.mg.demo.dao.UserDAO;
-import com.mg.demo.entity.Item;
 import com.mg.demo.entity.Role;
 import com.mg.demo.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ public class UserService implements Service<User> {
         Role customerRoleTemp;
         this.dao = dao;
         this.roleDAO = roleDAO;
-        customerRoleTemp = roleDAO.findByName("ROLE_CUSTOMER");
+        customerRoleTemp = roleDAO.findByAuthority("ROLE_CUSTOMER");
         if (customerRoleTemp == null) {
             customerRoleTemp = new Role("ROLE_CUSTOMER");
             roleDAO.save(customerRoleTemp);
@@ -67,7 +66,7 @@ public class UserService implements Service<User> {
     @Override
     public User save(User obj) {
         obj.setPassword(getEncoder().encode(obj.getPassword()));
-        Collection<Role> userRoles = obj.getRoles();
+        Collection<Role> userRoles = obj.getAuthorities();
         if (userRoles == null) {
             userRoles = new ArrayList<>();
         }
